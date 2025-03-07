@@ -7,6 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
+          "changeDetection": "OnPush",
           "style": "scss"
         }
       },
@@ -29,11 +30,14 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "node_modules/@taiga-ui/icons/src",
+                "output": "assets/taiga-ui/icons"
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "@taiga-ui/core/styles/taiga-ui-theme.less",
+              "@taiga-ui/core/styles/taiga-ui-fonts.less"
             ],
             "scripts": []
           },
