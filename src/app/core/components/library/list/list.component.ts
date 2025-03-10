@@ -21,6 +21,7 @@ import {
 } from '@taiga-ui/addon-table';
 import {CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
 import {HighlightPipe} from '../../../pipe/highlight.pipe';
+import {NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-library-list',
@@ -47,6 +48,7 @@ import {HighlightPipe} from '../../../pipe/highlight.pipe';
     TuiScrollable,
     TuiTextfieldControllerModule,
     HighlightPipe,
+    NgOptimizedImage,
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',

@@ -1,47 +1,53 @@
-<tui-loader [showLoader]="isLoading()" [overlay]="true">
+
   <div class="list">
+    <img ngSrc="assets/img/logo.webp" alt="logo" height="810" width="1440">
 
-    <div class="list__search">
-      <tui-input [tuiTextfieldCleaner]="true" [ngModel]="search" #searchInput>
-        Введите имя библиотеки
-      </tui-input>
-      <button (click)="onSearch(searchInput.value)" tuiButton>Найти</button>
-    </div>
-    <tui-scrollbar>
-      <cdk-virtual-scroll-viewport
-        appendOnly
-        tuiScrollable
-        class="viewport tui-zero-scrollbar"
-        [itemSize]="65"
-        [maxBufferPx]="650"
-      >
 
-        <table width="100%" tuiTable [columns]="columns">
-          <thead tuiThead>
-          <tr tuiThGroup>
-            <th tuiTh [sorter]="null" *tuiHead="'number'">
-              Порядковый номер
-            </th>
-            <th tuiTh [sorter]="null" *tuiHead="'fullName'">
-              Полное название
-            </th>
-            <th tuiTh [sorter]="null" *tuiHead="'address'">
-              Адрес
-            </th>
-          </tr>
-          </thead>
-          <tbody>
-          <tbody tuiTbody>
-          <ng-container *cdkVirtualFor="let library of libraries(); trackBy:trackByFn">
-            <tr [routerLink]="[library.global_id]" tuiTr>
-              <td *tuiCell="'number'" tuiTd>{{ library.Number }}</td>
-              <td *tuiCell="'fullName'" tuiTd [innerHTML]="library.Cells.FullName | highlight:search"></td>
-              <td *tuiCell="'address'" tuiTd>{{ library.Cells.ObjectAddress?.[0]?.Address || 'Нет адреса' }}</td>
-            </tr>
-          </ng-container>
-          </tbody>
-        </table>
-      </cdk-virtual-scroll-viewport>
-    </tui-scrollbar>
+    <tui-loader [showLoader]="isLoading()" [overlay]="true">
+      <div class="list__inner">
+        <div class="list__search">
+          <tui-input [tuiTextfieldCleaner]="true" [ngModel]="search" #searchInput>
+            Введите имя библиотеки
+          </tui-input>
+          <button (click)="onSearch(searchInput.value)" tuiButton>Найти</button>
+        </div>
+        <tui-scrollbar>
+          <cdk-virtual-scroll-viewport
+            appendOnly
+            tuiScrollable
+            class="viewport tui-zero-scrollbar"
+            [itemSize]="65"
+            [maxBufferPx]="650"
+          >
+
+            <table width="100%" tuiTable [columns]="columns">
+              <thead tuiThead>
+              <tr tuiThGroup>
+                <th tuiTh [sorter]="null" *tuiHead="'number'">
+                  Порядковый номер
+                </th>
+                <th tuiTh [sorter]="null" *tuiHead="'fullName'">
+                  Полное название
+                </th>
+                <th tuiTh [sorter]="null" *tuiHead="'address'">
+                  Адрес
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tbody tuiTbody>
+              <ng-container *cdkVirtualFor="let library of libraries(); trackBy:trackByFn">
+                <tr [routerLink]="[library.global_id]" tuiTr>
+                  <td *tuiCell="'number'" tuiTd>{{ library.Number }}</td>
+                  <td *tuiCell="'fullName'" tuiTd [innerHTML]="library.Cells.FullName | highlight:search"></td>
+                  <td *tuiCell="'address'" tuiTd>{{ library.Cells.ObjectAddress?.[0]?.Address || 'Нет адреса' }}</td>
+                </tr>
+              </ng-container>
+              </tbody>
+            </table>
+          </cdk-virtual-scroll-viewport>
+        </tui-scrollbar>
+      </div>
+    </tui-loader>
   </div>
-</tui-loader>
+
