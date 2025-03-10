@@ -1,1 +1,24 @@
-<p>item works!</p>
+<div class="library-item">
+  <tui-loader [showLoader]="isLoading()" [overlay]="true">
+    <h1>
+      <button routerLink="/library" size="s" tuiButton appearance="flat"> назад</button>
+      Карточка библиотеки {{ library()?.global_id }}
+    </h1>
+
+    <div class="list">
+      <div class="list__item">
+        <span class="key">Название</span> - <span class="value">{{ library()?.Cells?.FullName }}</span>
+      </div>
+      <div class="list__item">
+        <span class="key">Адреса</span> - @for (address of library()?.Cells?.ObjectAddress; track $index) {
+        <span class="value">{{ address?.Address }}</span>
+      }
+      </div>
+
+      <div class="list__item">
+        <span class="key">Прочие данные можно получить и вывести по-аналогии...</span>
+      </div>
+    </div>
+
+  </tui-loader>
+</div>

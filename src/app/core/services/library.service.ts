@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {TuiAlertService} from '@taiga-ui/core';
 import {Observable} from 'rxjs';
 import {LibraryListItem} from '../interface/library-list-item';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +23,18 @@ export class LibraryService {
     return this.http.post<LibraryListItem[]>(`https://apidata.mos.ru/${this.apiVersion}/datasets/526/rows`, cells, {params})
   }
 
-  getLibrariesCount(): Observable<number> {
-    let params = new HttpParams()
-      .set('api_key', this.apiKey)
+  getLibrary(filter?: string, cells: string[] = ["FullName", "ObjectAddress"]): Observable<LibraryListItem | null> {
+    let params = new HttpParams().set('api_key', this.apiKey);
 
-    return this.http.get<number>(`https://apidata.mos.ru/${this.apiVersion}/datasets/526/count`, {params})
+    if (filter?.trim()) {
+      params = params.set('$filter', `Cells/global_id eq ${filter}`);
+    }
+
+    return this.http.post<LibraryListItem[]>(`https://apidata.mos.ru/${this.apiVersion}/datasets/526/rows`, cells, {params})
+      .pipe(
+        map(response => response.length > 0 ? response[0] : null)
+      );
   }
+
+
 }
