@@ -1,0 +1,31 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .viewport {
+    min-height: 759px;
+  }
+
+  tbody {
+    tr {
+      cursor: pointer;
+
+      td {
+        .highlight {
+          background-color: yellow;
+          font-weight: bold;
+        }
+      }
+
+    }
+  }
+
+
+  &__search {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 1rem;
+    align-items: center;
+  }
+}
